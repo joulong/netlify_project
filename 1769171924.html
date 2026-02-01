@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+        code, pre {
+            font-family: monospace;
+        }
+        h1 code,
+        h2 code,
+        h3 code,
+        h4 code,
+        h5 code,
+        h6 code {
+            font-size: inherit;
+        }
+        ul li {
+            list-style-type: none;
+        }
+        table {
+        @extend .table;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-row">
+        <div class="container">
+            <p>好的，這是一份根據您提供的內容設計的考卷，包含 5 題單選題。</p>
+<p>```markdown</p>
+<h1>Agent Skill 基礎測驗</h1>
+<hr>
+<ol>
+<li>
+<p>Anthropic 正式將 Agent Skill 發佈為開放標準，支持跨平臺、跨產品複用的日期是哪一天？</p>
+<ul class="radio-list">
+<li><label><input type="radio" data-question="1" data-content="0" /> 2025 年 10 月 16 號</label></li>
+<li><label><input type="radio" data-question="0" data-content="1" /> 2025 年 12 月 18 號</label></li>
+<li><label><input type="radio" data-question="1" data-content="0" /> 2026 年 1 月 1 號</label></li>
+<li><label><input type="radio" data-question="1" data-content="0" /> 2026 年 2 月 14 號</label></li>
+</ul>
+</li>
+<li>
+<p>用最通俗的話來講，Agent Skill 其實是什麼？</p>
+<ul class="radio-list">
+<li><label><input type="radio" data-question="1" data-content="0" /> 一個大型程式庫</label></li>
+<li><label><input type="radio" data-question="0" data-content="1" /> 一個大模型可以隨時翻閱的說明文檔</label></li>
+<li><label><input type="radio" data-question="1" data-content="0" /> 一個獨立運行的程式</label></li>
+<li><label><input type="radio" data-question="1" data-content="0" /> 一種資料庫管理系統</label></li>
+</ul>
+</li>
+<li>
+<p>在 Agent Skill 的「漸進式披露機制」中，哪一層的內容是「始終加載」的，相當於大模型裡的目錄？</p>
+<ul class="radio-list">
+<li><label><input type="radio" data-question="1" data-content="0" /> 指令層</label></li>
+<li><label><input type="radio" data-question="1" data-content="0" /> 資源層</label></li>
+<li><label><input type="radio" data-question="0" data-content="1" /> 元數據層</label></li>
+<li><label><input type="radio" data-question="1" data-content="0" /> 腳本層</label></li>
+</ul>
+</li>
+<li>
+<p>關於 Agent Skill 的高級功能「Reference」和「Script」對模型上下文的影響，下列敘述何者正確？</p>
+<ul class="radio-list">
+<li><label><input type="radio" data-question="0" data-content="1" /> Reference 會被讀取並消耗 Token，Script 只會被執行且幾乎不消耗 Token。</label></li>
+<li><label><input type="radio" data-question="1" data-content="0" /> Script 會被讀取並消耗 Token，Reference 只會被執行且幾乎不消耗 Token。</label></li>
+<li><label><input type="radio" data-question="1" data-content="0" /> 兩者都會被讀取並消耗 Token。</label></li>
+<li><label><input type="radio" data-question="1" data-content="0" /> 兩者都不會被讀取，也不消耗 Token。</label></li>
+</ul>
+</li>
+<li>
+<p>根據 Anthropic 官方的核心觀點，MCP 與 Agent Skill 的主要區別是什麼？</p>
+<ul class="radio-list">
+<li><label><input type="radio" data-question="1" data-content="0" /> MCP 處理簡單邏輯，Agent Skill 連接數據。</label></li>
+<li><label><input type="radio" data-question="0" data-content="1" /> MCP 給大模型供給數據，Agent Skill 教會大模型如何處理這些數據。</label></li>
+<li><label><input type="radio" data-question="1" data-content="0" /> MCP 執行複雜代碼，Agent Skill 提供說明文檔。</label></li>
+<li>( ) MCP 始終加載，Agent Skill 按需加載。
+```</li>
+</ul>
+</li>
+</ol>
+        </div>
+    </div>
+    <div id="tg-msg" class="alert" role="alert" style="display: none">
+        <span id="tg-correct-questions"></span> 正確! <br /><b>Rating: <span id="tg-score"></span>%</b>
+    </div>
+    <div class="row">
+        <button id="check-questions" class="btn btn-lg btn-success">查看</button>
+        <button id="reset-questions" class="btn btn-link">全部重置</button>
+    </div>
+    <script type="text/javascript">$(function(){
+    $('ul.radio-list,ul.checklist,ul.textbox').each(function(i, el){
+        var questionClass = $(this).attr('class');
+        $(this).parent().addClass('question-row').addClass(questionClass);
+        if (questionClass=='radio-list') {
+            $(this).find('input[type="radio"]').attr('name', 'radio-question-' + i);
+        }
+    });
+
+    function checkQuestion() {
+        resetQuestions(true);
+        var questions = $('li.question-row');
+        var total_questions = questions.length;
+        var correct = 0;
+
+        questions.each(function(i, el) {
+            var self = $(this);
+            // Single Question.
+            if (self.hasClass('radio-list')) {
+                if (self.find('input[type="radio"][data-content="1"]:checked').length == 1) {
+                    correct += 1;
+                } else {
+                    self.addClass('text-danger');
+                }
+            }
+            // Textbox Question.
+            if(self.hasClass('textbox')) {
+                var textbox = self.find('input[type="text"]');
+                var correct_text = String(textbox.data("content")).trim().split("").reverse().join("");
+                if(String(textbox.val()).trim().toLowerCase()==correct_text.toLowerCase()) {
+                    correct += 1;
+                } else {
+                    self.addClass('text-danger');
+                    textbox.parent().find("i.text-correct").html(correct_text);
+                }
+            }
+            // Multiple selection Questions.
+            if(self.hasClass('checklist')) {
+                var total_corrects = self.find('input[type="checkbox"][data-content="1"]').length;
+                var total_incorrects = self.find('input[type="checkbox"][data-content="0"]').length;
+                var correct_selected = self.find('input[type="checkbox"][data-content="1"]:checked').length;
+                var incorrect_selected = self.find('input[type="checkbox"][data-content="0"]:checked').length;
+                var qc = +((correct_selected / total_corrects) - (incorrect_selected/total_incorrects)).toFixed(2);
+                if (qc < 0) {
+                    qc = 0;
+                }
+                correct += qc;
+                if (qc == 0) {
+                    self.addClass('text-danger');
+                } else if (qc > 0 && qc < 1) {
+                    self.addClass('text-warning');
+                }
+            }
+        });
+
+        showScore(correct, total_questions);
+    }
+
+    function showScore(correct, total) {
+        var score = (correct / total).toFixed(2) * 100;
+        var msgClass = 'alert-danger';
+        if (score >= 70) {
+            msgClass = 'alert-success';
+        } else if (score >= 50) {
+            msgClass = 'alert-warning';
+        }
+        $('#tg-correct-questions').text(correct + ' out of ' + total);
+        $('#tg-score').text(score);
+        $('#tg-msg').addClass(msgClass).show();
+    }
+    function resetQuestions(keep) {
+        $('li.question-row').removeClass('text-danger').removeClass('text-warning');
+        $('i.text-correct').html('');
+        $('#tg-msg').removeClass('alert-danger').removeClass('alert-success').removeClass('alert-warning').hide();
+        if(keep === true) {
+            return;
+        }
+        $('li.question-row').find('input[type="text"]').val('');
+        $('li.question-row').find('input[type="radio"],input[type="checkbox"]').prop('checked', false);
+    }
+    $('#check-questions').on('click', checkQuestion);
+    $('#reset-questions').on('click', resetQuestions);
+
+});</script>
+</div>
+</body>
+</html>
