@@ -12,7 +12,8 @@
         :root {
             --glass: rgba(255, 255, 255, 0.1);
             --glass-border: rgba(255, 255, 255, 0.2);
-            --accent: #00d2ff;
+            --accent-cyan: #00f2fe;
+            --accent-purple: #89f7fe;
         }
 
         body {
@@ -21,11 +22,9 @@
             min-height: 100vh;
             color: #fff;
             /* 華麗流光背景動畫 */
-            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #00d2ff);
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #00d2ff, #9d50bb);
             background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
-            display: flex;
-            flex-direction: column;
+            animation: gradientMove 12s ease infinite;
         }
 
         @keyframes gradientMove {
@@ -34,115 +33,121 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 毛玻璃導覽列 */
+        /* 導覽列毛玻璃 */
         .navbar {
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
+            padding: 15px 0;
         }
 
-        .nav-link-btn {
-            background: rgba(255, 255, 255, 0.15);
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
             border: 1px solid var(--glass-border);
             color: white !important;
             border-radius: 50px;
-            padding: 8px 20px;
+            padding: 6px 18px;
             margin-left: 10px;
-            transition: all 0.3s;
+            transition: 0.3s;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
-        .nav-link-btn:hover {
-            background: var(--accent);
-            box-shadow: 0 0 15px var(--accent);
-            color: #000 !important;
+        .nav-btn:hover {
+            background: white;
+            color: #1a1a2e !important;
+            box-shadow: 0 0 15px rgba(255,255,255,0.5);
         }
 
-        /* 酷炫方塊設計 */
-        .main-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            padding: 100px 0;
+        /* 方塊容器 */
+        .content-section {
+            padding-top: 140px;
+            padding-bottom: 60px;
         }
 
         .cool-card {
             background: var(--glass);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
-            padding: 40px;
+            padding: 35px;
             height: 100%;
+            display: flex;
+            flex-direction: column;
             transition: all 0.4s ease;
             position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            color: white;
-            display: block;
         }
 
         .cool-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(0,210,255,0.3);
-            color: white;
-        }
-
-        .cool-card i {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
-            color: var(--accent);
-            text-shadow: 0 0 10px var(--accent);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
         .card-title {
-            font-size: 1.8rem;
+            font-size: 1.75rem;
             font-weight: 700;
             margin-bottom: 20px;
+            color: var(--accent-cyan);
+            border-left: 5px solid var(--accent-cyan);
+            padding-left: 15px;
         }
 
         .feature-list {
             list-style: none;
             padding: 0;
-            text-align: left;
-            display: inline-block;
+            margin-bottom: 25px;
+            flex-grow: 1;
         }
 
         .feature-list li {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 小圓方塊標籤 */
+        .tag-container {
             display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tag-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            padding: 5px 15px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: var(--accent-purple);
+        }
+
+        /* 右下方按鈕 */
+        .go-btn {
+            align-self: flex-end;
+            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+            color: white;
+            text-decoration: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-flex;
             align-items: center;
         }
 
-        .feature-list li i {
-            font-size: 1.2rem;
-            margin-bottom: 0;
-            margin-right: 10px;
+        .go-btn i {
+            margin-left: 8px;
         }
 
-        .tag-group {
-            margin-top: 25px;
-        }
-
-        .cloud-tag {
-            background: rgba(0, 210, 255, 0.2);
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            margin: 3px;
-            display: inline-block;
-            border: 1px solid rgba(0, 210, 255, 0.3);
-        }
-
-        /* 特殊連結點選 */
-        .inner-link {
-            color: var(--accent);
-            text-decoration: underline;
-            cursor: pointer;
+        .go-btn:hover {
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
         }
     </style>
 </head>
@@ -151,58 +156,60 @@
     <nav class="navbar navbar-expand-lg fixed-top px-4">
         <div class="container-fluid">
             <a class="navbar-brand text-white fw-bold" href="#">
-                <i class="bi bi-cloud-haze2-fill me-2"></i>CLOUD PLATFORM
+                <i class="bi bi-cloud-sun-fill me-2"></i>智慧雲端系統
             </a>
             <div class="ms-auto d-flex">
-                <a href="https://lihi.cc/eZxyt" class="nav-link-btn shadow-sm">
-                    <i class="bi bi-magic"></i> AI 簡報生成系統
-                </a>
-                <a href="https://lihi.cc/q9Klv" class="nav-link-btn shadow-sm">
-                    <i class="bi bi-box-arrow-right"></i> 回登入
-                </a>
+                <a href="https://lihi.cc/eZxyt" class="nav-btn"><i class="bi bi-magic"></i> AI 簡報生成系統</a>
+                <a href="https://lihi.cc/q9Klv" class="nav-btn"><i class="bi bi-person-circle"></i> 回登入</a>
             </div>
         </div>
     </nav>
 
-    <div class="main-container">
-        <div class="container">
-            <div class="row g-4 justify-content-center">
-                
-                <div class="col-md-6">
-                    <div class="cool-card text-center">
-                        <i class="bi bi-graph-up-arrow"></i>
-                        <div class="card-title">自主學習紀錄系統</div>
-                        <ul class="feature-list">
-                            <li><i class="bi bi-patch-check"></i> 1. <a href="https://lihi.cc/lIGmG" style="color: inherit;">使用有紀錄 (點擊前往)</a></li>
-                            <li><i class="bi bi-pie-chart"></i> 2. 圖表統計</li>
-                            <li><i class="bi bi-cpu"></i> 3. AI 生成</li>
-                        </ul>
-                        <div class="tag-group">
-                            <span class="cloud-tag">AI 學習</span>
-                            <span class="cloud-tag">線上學習</span>
-                            <span class="cloud-tag">AI 生成</span>
-                        </div>
+    <div class="container content-section">
+        <div class="row g-4 justify-content-center">
+            
+            <div class="col-md-6">
+                <div class="cool-card">
+                    <div class="card-title">自主學習紀錄系統</div>
+                    <ul class="feature-list">
+                        <li><i class="bi bi-caret-right-fill text-info"></i> 1. <strong>使用有紀錄</strong></li>
+                        <li><i class="bi bi-caret-right-fill text-info"></i> 2. 圖表統計</li>
+                        <li><i class="bi bi-caret-right-fill text-info"></i> 3. AI 生成</li>
+                    </ul>
+                    
+                    <div class="tag-container">
+                        <span class="tag-item">AI學習</span>
+                        <span class="tag-item">線上學習</span>
+                        <span class="tag-item">AI生成</span>
                     </div>
-                </div>
 
-                <div class="col-md-6">
-                    <a href="https://lihi.cc/eZxyt" class="cool-card text-center">
-                        <i class="bi bi-easel2-fill"></i>
-                        <div class="card-title">AI 簡報大師</div>
-                        <ul class="feature-list">
-                            <li><i class="bi bi-collection-play"></i> 1. 多種輸入方式 (如圖片, Youtube…)</li>
-                            <li><i class="bi bi-stars"></i> 2. AI 生成</li>
-                            <li><i class="bi bi-share"></i> 3. 立即分享簡報</li>
-                        </ul>
-                        <div class="tag-group">
-                            <span class="cloud-tag">Google Slide</span>
-                            <span class="cloud-tag">擴充性強</span>
-                            <span class="cloud-tag">雲端分享</span>
-                        </div>
+                    <a href="https://lihi.cc/lIGmG" class="go-btn">
+                        點擊前往 <i class="bi bi-arrow-right-circle"></i>
                     </a>
                 </div>
-
             </div>
+
+            <div class="col-md-6">
+                <div class="cool-card">
+                    <div class="card-title">AI 簡報大師</div>
+                    <ul class="feature-list">
+                        <li><i class="bi bi-caret-right-fill text-info"></i> 1. 多種輸入方式 (如圖片, Youtube…)</li>
+                        <li><i class="bi bi-caret-right-fill text-info"></i> 2. AI 生成</li>
+                        <li><i class="bi bi-caret-right-fill text-info"></i> 3. 立即分享簡報</li>
+                    </ul>
+
+                    <div class="tag-container">
+                        <span class="tag-item">Goolge Slide</span>
+                        <span class="tag-item">擴充性強</span>
+                        <span class="tag-item">雲端分享</span>
+                    </div>
+
+                    <a href="https://lihi.cc/eZxyt" class="go-btn">
+                        點擊前往 <i class="bi bi-arrow-right-circle"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 
