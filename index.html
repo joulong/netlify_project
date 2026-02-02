@@ -10,10 +10,10 @@
     
     <style>
         :root {
-            --glass: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.25);
             --accent-cyan: #00f2fe;
-            --accent-purple: #89f7fe;
+            --accent-blue: #4facfe;
         }
 
         body {
@@ -21,10 +21,12 @@
             margin: 0;
             min-height: 100vh;
             color: #fff;
-            /* 華麗流光背景動畫 */
-            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #00d2ff, #9d50bb);
+            /* 華麗流光背景：深色系雲端感 */
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #00d2ff);
             background-size: 400% 400%;
-            animation: gradientMove 12s ease infinite;
+            animation: gradientMove 15s ease infinite;
+            display: flex;
+            flex-direction: column;
         }
 
         @keyframes gradientMove {
@@ -33,122 +35,138 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 導覽列毛玻璃 */
+        /* 毛玻璃導覽列 */
         .navbar {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--glass-border);
-            padding: 15px 0;
+            padding: 1rem 0;
         }
 
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.1);
+        .nav-link-custom {
+            background: var(--glass);
             border: 1px solid var(--glass-border);
             color: white !important;
             border-radius: 50px;
-            padding: 6px 18px;
-            margin-left: 10px;
-            transition: 0.3s;
+            padding: 8px 22px;
+            margin-left: 12px;
+            transition: all 0.3s ease;
             text-decoration: none;
-            font-size: 0.95rem;
+            font-weight: 500;
         }
 
-        .nav-btn:hover {
+        .nav-link-custom:hover {
             background: white;
-            color: #1a1a2e !important;
-            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+            color: #302b63 !important;
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
         }
 
-        /* 方塊容器 */
-        .content-section {
-            padding-top: 140px;
-            padding-bottom: 60px;
+        /* 內容區排版 */
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 0;
+        }
+
+        /* 酷炫方塊連結 */
+        .cool-card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
         }
 
         .cool-card {
             background: var(--glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 35px;
+            border-radius: 30px;
+            padding: 45px 35px;
             height: 100%;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
             display: flex;
             flex-direction: column;
-            transition: all 0.4s ease;
-            position: relative;
         }
 
         .cool-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-15px);
+            background: rgba(255, 255, 255, 0.18);
             border-color: var(--accent-cyan);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4), 0 0 20px rgba(0,242,254,0.2);
         }
 
         .card-title {
-            font-size: 1.75rem;
+            font-size: 1.9rem;
             font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--accent-cyan);
-            border-left: 5px solid var(--accent-cyan);
-            padding-left: 15px;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .feature-list {
             list-style: none;
             padding: 0;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             flex-grow: 1;
         }
 
         .feature-list li {
-            margin-bottom: 10px;
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            opacity: 0.95;
         }
 
-        /* 小圓方塊標籤 */
-        .tag-container {
+        .feature-list li i {
+            color: var(--accent-cyan);
+            margin-right: 12px;
+        }
+
+        /* 3小圓方塊標籤 */
+        .tag-group {
             display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
-        .tag-item {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--glass-border);
-            padding: 5px 15px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            color: var(--accent-purple);
-        }
-
-        /* 右下方按鈕 */
-        .go-btn {
-            align-self: flex-end;
-            background: linear-gradient(90deg, #00d2ff, #3a7bd5);
-            color: white;
-            text-decoration: none;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: bold;
+        .tag-pill {
+            background: rgba(0, 242, 254, 0.15);
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #d1faff;
             transition: 0.3s;
-            display: inline-flex;
-            align-items: center;
         }
 
-        .go-btn i {
-            margin-left: 8px;
+        .cool-card:hover .tag-pill {
+            background: var(--accent-cyan);
+            color: #0f0c29;
+            border-color: var(--accent-cyan);
         }
 
-        .go-btn:hover {
-            color: white;
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+        /* 滑鼠指引提示 */
+        .click-hint {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            transition: 0.3s;
         }
+
+        .cool-card:hover .click-hint {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
     </style>
 </head>
 <body>
@@ -156,60 +174,58 @@
     <nav class="navbar navbar-expand-lg fixed-top px-4">
         <div class="container-fluid">
             <a class="navbar-brand text-white fw-bold" href="#">
-                <i class="bi bi-cloud-sun-fill me-2"></i>智慧雲端系統
+                <i class="bi bi-cloud-lightning-rays-fill me-2"></i>AI Cloud Hub
             </a>
             <div class="ms-auto d-flex">
-                <a href="https://lihi.cc/eZxyt" class="nav-btn"><i class="bi bi-magic"></i> AI 簡報生成系統</a>
-                <a href="https://lihi.cc/q9Klv" class="nav-btn"><i class="bi bi-person-circle"></i> 回登入</a>
+                <a href="https://lihi.cc/eZxyt" class="nav-link-custom shadow-sm"><i class="bi bi-magic me-1"></i> AI 簡報生成系統</a>
+                <a href="https://lihi.cc/q9Klv" class="nav-link-custom shadow-sm"><i class="bi bi-box-arrow-in-right me-1"></i> 回登入</a>
             </div>
         </div>
     </nav>
 
-    <div class="container content-section">
-        <div class="row g-4 justify-content-center">
-            
-            <div class="col-md-6">
-                <div class="cool-card">
-                    <div class="card-title">自主學習紀錄系統</div>
-                    <ul class="feature-list">
-                        <li><i class="bi bi-caret-right-fill text-info"></i> 1. <strong>使用有紀錄</strong></li>
-                        <li><i class="bi bi-caret-right-fill text-info"></i> 2. 圖表統計</li>
-                        <li><i class="bi bi-caret-right-fill text-info"></i> 3. AI 生成</li>
-                    </ul>
-                    
-                    <div class="tag-container">
-                        <span class="tag-item">AI學習</span>
-                        <span class="tag-item">線上學習</span>
-                        <span class="tag-item">AI生成</span>
-                    </div>
-
-                    <a href="https://lihi.cc/lIGmG" class="go-btn">
-                        點擊前往 <i class="bi bi-arrow-right-circle"></i>
+    <div class="content-wrapper">
+        <div class="container">
+            <div class="row g-5">
+                
+                <div class="col-md-6">
+                    <a href="https://lihi.cc/lIGmG" class="cool-card-link">
+                        <div class="cool-card">
+                            <h2 class="card-title">自主學習紀錄系統</h2>
+                            <ul class="feature-list">
+                                <li><i class="bi bi-check-circle-fill"></i> 1. 使用有紀錄</li>
+                                <li><i class="bi bi-bar-chart-fill"></i> 2. 圖表統計</li>
+                                <li><i class="bi bi-cpu-fill"></i> 3. AI 生成</li>
+                            </ul>
+                            <div class="tag-group">
+                                <span class="tag-pill">AI 學習</span>
+                                <span class="tag-pill">線上學習</span>
+                                <span class="tag-pill">AI 生成</span>
+                            </div>
+                            <div class="click-hint">點擊進入系統 <i class="bi bi-arrow-right"></i></div>
+                        </div>
                     </a>
                 </div>
-            </div>
 
-            <div class="col-md-6">
-                <div class="cool-card">
-                    <div class="card-title">AI 簡報大師</div>
-                    <ul class="feature-list">
-                        <li><i class="bi bi-caret-right-fill text-info"></i> 1. 多種輸入方式 (如圖片, Youtube…)</li>
-                        <li><i class="bi bi-caret-right-fill text-info"></i> 2. AI 生成</li>
-                        <li><i class="bi bi-caret-right-fill text-info"></i> 3. 立即分享簡報</li>
-                    </ul>
-
-                    <div class="tag-container">
-                        <span class="tag-item">Goolge Slide</span>
-                        <span class="tag-item">擴充性強</span>
-                        <span class="tag-item">雲端分享</span>
-                    </div>
-
-                    <a href="https://lihi.cc/eZxyt" class="go-btn">
-                        點擊前往 <i class="bi bi-arrow-right-circle"></i>
+                <div class="col-md-6">
+                    <a href="https://lihi.cc/eZxyt" class="cool-card-link">
+                        <div class="cool-card">
+                            <h2 class="card-title">AI 簡報大師</h2>
+                            <ul class="feature-list">
+                                <li><i class="bi bi-image-fill"></i> 1. 多種輸入方式 (圖片/Youtube)</li>
+                                <li><i class="bi bi-stars"></i> 2. AI 生成</li>
+                                <li><i class="bi bi-share-fill"></i> 3. 立即分享簡報</li>
+                            </ul>
+                            <div class="tag-group">
+                                <span class="tag-pill">Goolge Slide</span>
+                                <span class="tag-pill">擴充性強</span>
+                                <span class="tag-pill">雲端分享</span>
+                            </div>
+                            <div class="click-hint">點擊開啟大師 <i class="bi bi-arrow-right"></i></div>
+                        </div>
                     </a>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 
