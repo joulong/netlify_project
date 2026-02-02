@@ -1,184 +1,197 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 雲端智慧平台</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
     <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --accent-color: #00f2fe;
+        }
+
         body {
-            font-family: sans-serif;
+            font-family: 'Noto Sans TC', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: white;
+            /* 流光動畫背景 */
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #00d2ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
         }
-        code, pre {
-            font-family: monospace;
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-        h1 code,
-        h2 code,
-        h3 code,
-        h4 code,
-        h5 code,
-        h6 code {
-            font-size: inherit;
+
+        /* 毛玻璃導覽列 */
+        .navbar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1rem 2rem;
         }
-        ul li {
-            list-style-type: none;
+
+        /* 酷炫方塊按鈕 */
+        .feature-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: white;
+            display: block;
         }
-        table {
-        @extend .table;
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 242, 254, 0.4);
+            border-color: var(--accent-color);
+        }
+
+        .feature-card h3 {
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .feature-tag {
+            font-size: 0.85rem;
+            background: rgba(0, 242, 254, 0.2);
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-right: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .btn-custom {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: white;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+            margin-left: 10px;
+        }
+
+        .btn-custom:hover {
+            background: var(--accent-color);
+            color: #1a1a2e;
+            transform: scale(1.05);
+        }
+
+        .list-unstyled li {
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .list-unstyled li i {
+            color: var(--accent-color);
+            margin-right: 10px;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
 </head>
 <body>
 
-<div class="container">
-    <div class="form-row">
-        <div class="container">
-            <p>好的，這是一份根據您提供的內容設計的考卷，包含 5 題單選題。</p>
-<p>```markdown</p>
-<h1>Agent Skill 基礎測驗</h1>
-<hr>
-<ol>
-<li>
-<p>Anthropic 正式將 Agent Skill 發佈為開放標準，支持跨平臺、跨產品複用的日期是哪一天？</p>
-<ul class="radio-list">
-<li><label><input type="radio" data-question="1" data-content="0" /> 2025 年 10 月 16 號</label></li>
-<li><label><input type="radio" data-question="0" data-content="1" /> 2025 年 12 月 18 號</label></li>
-<li><label><input type="radio" data-question="1" data-content="0" /> 2026 年 1 月 1 號</label></li>
-<li><label><input type="radio" data-question="1" data-content="0" /> 2026 年 2 月 14 號</label></li>
-</ul>
-</li>
-<li>
-<p>用最通俗的話來講，Agent Skill 其實是什麼？</p>
-<ul class="radio-list">
-<li><label><input type="radio" data-question="1" data-content="0" /> 一個大型程式庫</label></li>
-<li><label><input type="radio" data-question="0" data-content="1" /> 一個大模型可以隨時翻閱的說明文檔</label></li>
-<li><label><input type="radio" data-question="1" data-content="0" /> 一個獨立運行的程式</label></li>
-<li><label><input type="radio" data-question="1" data-content="0" /> 一種資料庫管理系統</label></li>
-</ul>
-</li>
-<li>
-<p>在 Agent Skill 的「漸進式披露機制」中，哪一層的內容是「始終加載」的，相當於大模型裡的目錄？</p>
-<ul class="radio-list">
-<li><label><input type="radio" data-question="1" data-content="0" /> 指令層</label></li>
-<li><label><input type="radio" data-question="1" data-content="0" /> 資源層</label></li>
-<li><label><input type="radio" data-question="0" data-content="1" /> 元數據層</label></li>
-<li><label><input type="radio" data-question="1" data-content="0" /> 腳本層</label></li>
-</ul>
-</li>
-<li>
-<p>關於 Agent Skill 的高級功能「Reference」和「Script」對模型上下文的影響，下列敘述何者正確？</p>
-<ul class="radio-list">
-<li><label><input type="radio" data-question="0" data-content="1" /> Reference 會被讀取並消耗 Token，Script 只會被執行且幾乎不消耗 Token。</label></li>
-<li><label><input type="radio" data-question="1" data-content="0" /> Script 會被讀取並消耗 Token，Reference 只會被執行且幾乎不消耗 Token。</label></li>
-<li><label><input type="radio" data-question="1" data-content="0" /> 兩者都會被讀取並消耗 Token。</label></li>
-<li><label><input type="radio" data-question="1" data-content="0" /> 兩者都不會被讀取，也不消耗 Token。</label></li>
-</ul>
-</li>
-<li>
-<p>根據 Anthropic 官方的核心觀點，MCP 與 Agent Skill 的主要區別是什麼？</p>
-<ul class="radio-list">
-<li><label><input type="radio" data-question="1" data-content="0" /> MCP 處理簡單邏輯，Agent Skill 連接數據。</label></li>
-<li><label><input type="radio" data-question="0" data-content="1" /> MCP 給大模型供給數據，Agent Skill 教會大模型如何處理這些數據。</label></li>
-<li><label><input type="radio" data-question="1" data-content="0" /> MCP 執行複雜代碼，Agent Skill 提供說明文檔。</label></li>
-<li>( ) MCP 始終加載，Agent Skill 按需加載。
-```</li>
-</ul>
-</li>
-</ol>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white fw-bold" href="#"><i class="bi bi-cloud-check-fill me-2"></i>Cloud AI Platform</a>
+            <div class="ms-auto d-flex">
+                <a href="https://lihi.cc/eZxyt" class="btn btn-custom rounded-pill shadow-sm"><i class="bi bi-magic me-1"></i> AI 簡報生成系統</a>
+                <a href="https://lihi.cc/q9Klv" class="btn btn-custom rounded-pill shadow-sm"><i class="bi bi-person-circle me-1"></i> 回登入</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5 pt-5">
+        <div class="row text-center mb-5 mt-4">
+            <div class="col">
+                <h1 class="display-4 fw-bold">智能雲端學習空間</h1>
+                <p class="lead">探索未來學習的無限可能</p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <a href="#" class="feature-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-journal-check fs-1 me-3"></i>
+                        <h3>自主學習紀錄系統</h3>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-check2-circle"></i>1. 使用有紀錄</li>
+                        <li><i class="bi bi-check2-circle"></i>2. 圖表統計</li>
+                        <li><i class="bi bi-check2-circle"></i>3. AI 生成</li>
+                    </ul>
+                    <hr class="my-3">
+                    <div class="tags">
+                        <span class="feature-tag">AI 學習</span>
+                        <span class="feature-tag">線上學習</span>
+                        <span class="feature-tag">AI 生成</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6">
+                <a href="https://lihi.cc/eZxyt" class="feature-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-presentation-chart fs-1 me-3"></i>
+                        <h3>AI 簡報大師</h3>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li><i class="bi bi-check2-circle"></i>1. 多種輸入方式 (圖片, Youtube...)</li>
+                        <li><i class="bi bi-check2-circle"></i>2. AI 生成</li>
+                        <li><i class="bi bi-check2-circle"></i>3. 立即分享簡報</li>
+                    </ul>
+                    <hr class="my-3">
+                    <div class="tags">
+                        <span class="feature-tag">Google Slide</span>
+                        <span class="feature-tag">擴充性強</span>
+                        <span class="feature-tag">雲端分享</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-database-fill-gear fs-1 me-3"></i>
+                        <h3>雲端數據中心</h3>
+                    </div>
+                    <p>即將上線的雲端存儲與分析服務。</p>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="feature-card">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-cpu-fill fs-1 me-3"></i>
+                        <h3>智能運算節點</h3>
+                    </div>
+                    <p>高效能 AI 算力支援，加速您的工作流程。</p>
+                </div>
+            </div>
         </div>
     </div>
-    <div id="tg-msg" class="alert" role="alert" style="display: none">
-        <span id="tg-correct-questions"></span> 正確! <br /><b>Rating: <span id="tg-score"></span>%</b>
-    </div>
-    <div class="row">
-        <button id="check-questions" class="btn btn-lg btn-success">查看</button>
-        <button id="reset-questions" class="btn btn-link">全部重置</button>
-    </div>
-    <script type="text/javascript">$(function(){
-    $('ul.radio-list,ul.checklist,ul.textbox').each(function(i, el){
-        var questionClass = $(this).attr('class');
-        $(this).parent().addClass('question-row').addClass(questionClass);
-        if (questionClass=='radio-list') {
-            $(this).find('input[type="radio"]').attr('name', 'radio-question-' + i);
-        }
-    });
 
-    function checkQuestion() {
-        resetQuestions(true);
-        var questions = $('li.question-row');
-        var total_questions = questions.length;
-        var correct = 0;
-
-        questions.each(function(i, el) {
-            var self = $(this);
-            // Single Question.
-            if (self.hasClass('radio-list')) {
-                if (self.find('input[type="radio"][data-content="1"]:checked').length == 1) {
-                    correct += 1;
-                } else {
-                    self.addClass('text-danger');
-                }
-            }
-            // Textbox Question.
-            if(self.hasClass('textbox')) {
-                var textbox = self.find('input[type="text"]');
-                var correct_text = String(textbox.data("content")).trim().split("").reverse().join("");
-                if(String(textbox.val()).trim().toLowerCase()==correct_text.toLowerCase()) {
-                    correct += 1;
-                } else {
-                    self.addClass('text-danger');
-                    textbox.parent().find("i.text-correct").html(correct_text);
-                }
-            }
-            // Multiple selection Questions.
-            if(self.hasClass('checklist')) {
-                var total_corrects = self.find('input[type="checkbox"][data-content="1"]').length;
-                var total_incorrects = self.find('input[type="checkbox"][data-content="0"]').length;
-                var correct_selected = self.find('input[type="checkbox"][data-content="1"]:checked').length;
-                var incorrect_selected = self.find('input[type="checkbox"][data-content="0"]:checked').length;
-                var qc = +((correct_selected / total_corrects) - (incorrect_selected/total_incorrects)).toFixed(2);
-                if (qc < 0) {
-                    qc = 0;
-                }
-                correct += qc;
-                if (qc == 0) {
-                    self.addClass('text-danger');
-                } else if (qc > 0 && qc < 1) {
-                    self.addClass('text-warning');
-                }
-            }
-        });
-
-        showScore(correct, total_questions);
-    }
-
-    function showScore(correct, total) {
-        var score = (correct / total).toFixed(2) * 100;
-        var msgClass = 'alert-danger';
-        if (score >= 70) {
-            msgClass = 'alert-success';
-        } else if (score >= 50) {
-            msgClass = 'alert-warning';
-        }
-        $('#tg-correct-questions').text(correct + ' out of ' + total);
-        $('#tg-score').text(score);
-        $('#tg-msg').addClass(msgClass).show();
-    }
-    function resetQuestions(keep) {
-        $('li.question-row').removeClass('text-danger').removeClass('text-warning');
-        $('i.text-correct').html('');
-        $('#tg-msg').removeClass('alert-danger').removeClass('alert-success').removeClass('alert-warning').hide();
-        if(keep === true) {
-            return;
-        }
-        $('li.question-row').find('input[type="text"]').val('');
-        $('li.question-row').find('input[type="radio"],input[type="checkbox"]').prop('checked', false);
-    }
-    $('#check-questions').on('click', checkQuestion);
-    $('#reset-questions').on('click', resetQuestions);
-
-});</script>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
